@@ -155,6 +155,7 @@ function domanda() {
   const scelto = d.multi ? (risposte[d.id] || []) : risposte[d.id];
   app.innerHTML = `
     <div class="progresso" aria-hidden="true"><i style="width:${(passo / DOMANDE.length) * 100}%"></i></div>
+    ${pagato && passo === 0 ? `<div class="riquadro">Grazie per l'acquisto! Su questo telefono non troviamo le tue risposte di prima: rispondi di nuovo alle 6 domande (2 minuti) e il tuo resoconto è pronto.</div>` : ""}
     <p class="occhiello">Domanda ${passo + 1} di ${DOMANDE.length}</p>
     <h2 style="margin-top:8px">${esc(d.titolo)}</h2>
     ${d.sotto ? `<p class="sotto">${esc(d.sotto)}</p>` : ""}
@@ -267,7 +268,7 @@ function resoconto() {
     <h1 style="margin-top:8px">${risposte.nome ? esc(risposte.nome) + ", ecco" : "Ecco"} <em>cosa spetta a te</em>.</h1>
     <p class="sotto">${lista.length} ${lista.length === 1 ? "voce" : "voci"} in base alle tue risposte. Dati verificati sui siti ufficiali al ${esc(DATI.verifica)}.</p>
     <div class="no-stampa"><button class="btn oro" id="pdf">Salva come PDF</button>
-      <p class="nota">Sull'iPhone: tocca il bottone, poi l'icona di condivisione (□↑) e «Salva su File». Su Android: «Salva come PDF».</p></div>
+      <p class="nota">Sull'iPhone: tocca il bottone, poi l'icona di condivisione (□↑) e «Salva su File». Su Android: «Salva come PDF».<br>Se il bottone non fa niente, sei dentro l'app di Instagram, TikTok o della posta: tocca ⋯ e «Apri nel browser», poi riprova.</p></div>
     ${senzaIsee()}
     <div class="card">${lista.map(voceIntera).join("") || "<p>Per ora nessuna voce: rifai le domande se la tua situazione cambia.</p>"}</div>
     ${lettere.length ? `<div class="card"><h2>Le tue lettere pronte</h2>${lettere.map(letteraHtml).join("")}</div>` : ""}
